@@ -28,15 +28,13 @@
                                         <h4>{{ $forum->title }}</h4>
                                         <p class="forum-description" data-forum-id="{{ $forum->id }}" style="cursor: pointer;">{{ $forum->description }}</p>
                                         <div class="posts-container" id="posts-{{ $forum->id }}" style="display: none;">
-                                            <h5>Posts:</h5>
+                                            <h5>Recent Posts:</h5>
                                             <ul>
-                                                @if($forum->posts->isNotEmpty())
-                                                    @foreach($forum->posts as $post)
-                                                        <li>{{ $post->title }}</li>
-                                                    @endforeach
-                                                @else
-                                                    <li>No Posts</li>
-                                                @endif
+                                                @forelse($forum->posts->take(3) as $post)
+                                                    <li>{{ $post->title }}</li>
+                                                @empty
+                                                    <li>No recent posts</li>
+                                                @endforelse
                                             </ul>
                                             @if($forum->posts_count > 3)
                                                 <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-primary">View all posts</a>

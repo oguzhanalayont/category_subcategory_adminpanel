@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index()
-    {
-        $categories = Category::with(['forums' => function($query) {
-            $query->withCount('posts');
-        }, 'forums.posts' => function($query) {
-            $query->latest()->limit(3);
-        }])
-        ->withCount('forums')
-        ->get();
+{
+    $categories = Category::with(['forums' => function($query) {
+        $query->withCount('posts')->with(['posts' => function($query) {
+            $query->latest()->take(3);
+        }]);
+    }])
+    ->withCount('forums')
+    ->get();
 
-        return view('home', compact('categories'));
-    }
+    return view('home', compact('categories'));
+}
 }
