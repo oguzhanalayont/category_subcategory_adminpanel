@@ -10,10 +10,12 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::with(['forums' => function($query) {
-            $query->withCount('posts')->limit(3);
+            $query->withCount('posts');
         }, 'forums.posts' => function($query) {
-            $query->limit(3);
-        }])->get();
+            $query->latest()->limit(3);
+        }])
+        ->withCount('forums')
+        ->get();
 
         return view('home', compact('categories'));
     }

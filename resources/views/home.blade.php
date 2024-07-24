@@ -9,40 +9,66 @@
         background-position: center;
     }
 </style>
-
-<div class="row">
-    @foreach($categories as $category)
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3>{{ $category->title }}</h3>
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h1 class="mb-4">Categories</h1>
+        <div class="row">
+            @foreach($categories as $category)
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>{{ $category->title }}</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ $category->description }}</p>
+                            <h3>Forums:</h3>
+                            <ul class="list-group">
+                                @foreach($category->forums->take(3) as $forum)
+                                    <li class="list-group-item" id="forum-{{ $forum->id }}">
+                                        <h4>{{ $forum->title }}</h4>
+                                        <p class="forum-description" data-forum-id="{{ $forum->id }}" style="cursor: pointer;">{{ $forum->description }}</p>
+                                        <div class="posts-container" id="posts-{{ $forum->id }}" style="display: none;">
+                                            <h5>Posts:</h5>
+                                            <ul>
+                                                @if($forum->posts->isNotEmpty())
+                                                    @foreach($forum->posts as $post)
+                                                        <li>{{ $post->title }}</li>
+                                                    @endforeach
+                                                @else
+                                                    <li>No Posts</li>
+                                                @endif
+                                            </ul>
+                                            @if($forum->posts_count > 3)
+                                                <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-primary">View all posts</a>
+                                            @endif
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            @if($category->forums_count > 3)
+                                <a href="{{ route('categories.show', $category) }}" class="btn btn-primary mt-3">View all forums</a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p>{{ $category->description }}</p>
-                    <h4>Forums:</h4>
-                    <ul class="list-group">
-                        @foreach($category->forums as $forum)
-                            <li class="list-group-item">
-                                <h5>{{ $forum->title }} ({{ $forum->posts_count }} posts)</h5>
-                                <p>{{ $forum->description }}</p>
-                                <h6>Recent Posts:</h6>
-                                <ul>
-                                    @foreach($forum->posts as $post)
-                                        <li>{{ $post->title }}</li>
-                                    @endforeach
-                                </ul>
-                                @if($forum->posts_count > 3)
-                                    <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-primary">View all posts</a>
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-                    @if($category->forums->count() > 3)
-                        <a href="{{ route('categories.show', $category) }}" class="btn btn-primary mt-3">View all forums</a>
-                    @endif
-                </div>
-            </div>
+            @endforeach
         </div>
-    @endforeach
+    </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+        if (event.target.classList.contains('forum-description')) {
+            const forumId = event.target.getAttribute('data-forum-id');
+            const postsContainer = document.getElementById(`posts-${forumId}`);
+            if (postsContainer) {
+                postsContainer.style.display = postsContainer.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    });
+});
+</script>
 @endsection
