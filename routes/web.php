@@ -11,3 +11,4 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('categories', CategoryController::class);
 Route::resource('forums', ForumController::class);
 Route::resource('posts', PostController::class);
+Route::get('/categories/{id}/forums', [ForumController::class, 'index'])->name('categories.forums');

@@ -11,7 +11,7 @@
 </style>
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <h1 class="mb-4">Categories</h1>
+        <h1 class="mb-4">Kategoriler</h1>
         <div class="row">
             @foreach($categories as $category)
                 <div class="col-md-6 mb-4">
@@ -37,14 +37,14 @@
                                                 @endforelse
                                             </ul>
                                             @if($forum->posts_count > 3)
-                                                <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-primary">View all posts</a>
+                                                <a href="{{ route('forums.show', $forum->id) }}" class="btn btn-sm btn-primary">View all posts</a>
                                             @endif
                                         </div>
                                     </li>
                                 @endforeach
                             </ul>
                             @if($category->forums_count > 3)
-                                <a href="{{ route('categories.show', $category) }}" class="btn btn-primary mt-3">View all forums</a>
+                                <a href="{{ route('categories.forums', $category->id) }}" class="btn btn-primary mt-3">View all forums</a>
                             @endif
                         </div>
                     </div>

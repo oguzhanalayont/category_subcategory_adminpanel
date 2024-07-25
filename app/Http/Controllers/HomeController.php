@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
-{
-    $categories = Category::with(['forums' => function($query) {
-        $query->withCount('posts')->with(['posts' => function($query) {
-            $query->latest()->take(3);
-        }]);
-    }])
-    ->withCount('forums')
-    ->get();
+    {
 
-    return view('home', compact('categories'));
-}
+        $categories = Category::withCount('forums')
+            ->with(['forums' => function ($query) {
+                $query->withCount('posts')
+                      ->take(3)
+                      ->orderByDesc('created_at');
+            }])
+            ->take(3) // İlk 3 kategoriyi al
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('home', compact('categories'));
+    }
 }
