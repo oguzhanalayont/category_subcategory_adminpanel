@@ -13,10 +13,10 @@ class HomeController extends Controller
             ->with(['forums' => function ($query) {
                 $query->withCount('posts')
                       ->take(3)
-                      ->orderByDesc('created_at');
+                      ->orderBy('created_at');
             }])
-            ->take(3) // İlk 3 kategoriyi al
-            ->orderByDesc('created_at')
+            ->take(3)
+            ->orderBy('created_at')
             ->get();
 
         return view('home', compact('categories'));
