@@ -16,3 +16,12 @@ Route::resource('posts', PostController::class);
 Route::get('/categories/{id}/forums', [ForumController::class, 'index'])->name('categories.forums');
 Route::get('/categories/{category}', [CategoryViewController::class, 'view'])->name('categories.view');
 Route::get('/forums/{forum}', [ForumViewController::class, 'view'])->name('forums.view');
+Route::resource('forums', ForumController::class)->names([
+    'index' => 'forums.index',
+    'create' => 'forums.create',
+    'store' => 'forums.store',
+    'show' => 'forums.show',
+    'edit' => 'forums.edit',
+    'update' => 'forums.update',
+    'destroy' => 'forums.destroy',
+]);

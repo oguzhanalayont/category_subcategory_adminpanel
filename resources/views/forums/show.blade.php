@@ -4,7 +4,7 @@
 <div class="container">
     <h1>{{ $forum->title }}</h1>
     <p>{{ $forum->description }}</p>
-    <p>Category: <a href="{{ route('categories.show', $forum->category) }}">{{ $forum->category->title }}</a></p>
+    <p>Category: <a href="{{ route('forums.show', $forum->category) }}">{{ $forum->category->title }}</a></p>
 
     <h2>Posts in this Forum</h2>
     <table class="table">
@@ -23,7 +23,6 @@
                 <td>{{ Str::limit($post->content, 100) }}</td>
                 <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
                 <td>
-                    <a href="{{ route('posts.show', $post) }}" class="btn btn-sm btn-info">View</a>
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
                         @csrf

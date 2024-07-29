@@ -21,7 +21,6 @@
                 <td>{{ $post->forum->title }}</td>
                 <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
                 <td>
-                    <a href="{{ route('posts.show', $post) }}" class="btn btn-sm btn-info">View</a>
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-warning">Edit</a>
                     <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline">
                         @csrf
