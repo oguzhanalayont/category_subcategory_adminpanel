@@ -12,6 +12,8 @@
             <tr>
                 <th>Title</th>
                 <th>Content Preview</th>
+                <th>Category</th>
+                <th>Forum</th>
                 <th>Created At</th>
                 <th>Actions</th>
             </tr>
@@ -21,6 +23,8 @@
             <tr>
                 <td>{{ $post->title }}</td>
                 <td>{{ Str::limit($post->content, 100) }}</td>
+                <td><p>{{ $forum->title }}</p></td>
+                <td><a href="{{ route('forums.index', $forum->category) }}">{{ $forum->category->title }}</a></td>
                 <td>{{ $post->created_at->format('Y-m-d H:i') }}</td>
                 <td>
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-warning">Edit</a>

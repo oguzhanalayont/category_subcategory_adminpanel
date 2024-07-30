@@ -25,3 +25,13 @@ Route::resource('forums', ForumController::class)->names([
     'update' => 'forums.update',
     'destroy' => 'forums.destroy',
 ]);
+Route::resource('categories', CategoryController::class)->names([
+    'index' => 'categories.index',
+    'create' => 'categories.create',
+    'store' => 'categories.store',
+    'show' => 'categories.show',
+    'edit' => 'categories.edit',
+    'update' => 'categories.update',
+    'destroy' => 'categories.destroy',
+]);
+Route::get('/categories/{id}/view', [CategoryController::class, 'view'])->name('categories.view');

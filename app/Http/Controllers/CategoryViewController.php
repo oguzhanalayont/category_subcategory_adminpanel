@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class CategoryViewController extends Controller
 {
-    public function view($id)
-{
-    $category = Category::with('forums')->findOrFail($id);
-    return view('categories.view', compact('category'));
-}
+    public function view(Category $category)
+    {
+        $category->load('forums');
+        return view('categories.view', compact('category'));
+    }
 }
