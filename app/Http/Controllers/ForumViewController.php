@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class ForumViewController extends Controller
 {
-    public function view($id)
+    public function view(Forum $forum)
 {
-    $forum = Forum::with('posts')->findOrFail($id);
+    $forum->load('posts');
     return view('forums.view', compact('forum'));
 }
 }

@@ -37,14 +37,14 @@
                                                 @endforelse
                                             </ul>
                                             @if($forum->posts_count > 3)
-                                            <a href="{{ route('forums.show', $forum->id) }}" class="btn btn-sm btn-primary">View all posts</a>
+                                            <a href="{{ route('forums.view', $forum->id) }}" class="btn btn-sm btn-primary">View all posts</a>
                                             @endif
                                         </div>
                                     </li>
                                 @endforeach
                             </ul>
                             @if($category->forums_count > 3)
-                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary mt-3">View all forums</a>
+                            <a href="{{ route('categories.view', $category->id) }}" class="btn btn-primary mt-3">View all forums</a>
                             @endif
                         </div>
                     </div>
