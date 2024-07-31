@@ -12,10 +12,8 @@ class HomeController extends Controller
         $categories = Category::withCount('forums')
             ->with(['forums' => function ($query) {
                 $query->withCount('posts')
-                      ->take(3)
-                      ->orderBy('created_at');
+                      ->orderBy('created_at',);
             }])
-            ->take(3)
             ->orderBy('created_at')
             ->get();
 
