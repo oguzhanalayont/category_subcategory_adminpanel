@@ -10,8 +10,11 @@ class CategoryViewController extends Controller
 {
 
     public function view(Category $category)
-    {
-        $category->load('forums');
-        return view('categories.view', compact('category'));
-    }
+{
+    $category->load(['forums' => function ($query) {
+        $query->withCount('posts');
+    }]);
+    return view('categories.view', compact('category'));
+}
+
 }

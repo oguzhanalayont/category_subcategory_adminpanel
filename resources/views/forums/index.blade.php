@@ -9,7 +9,6 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Category</th>
-                <th>Posts Count</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
                 <td>{{ $forum->title }}</td>
                 <td>{{ Str::limit($forum->description, 100) }}</td>
                 <td>{{ $forum->category->title }}</td>
-                <td>{{ $forum->posts_count }}</td>
                 <td>
                     <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-info">View</a>
                     <a href="{{ route('forums.edit', $forum) }}" class="btn btn-sm btn-warning">Edit</a>

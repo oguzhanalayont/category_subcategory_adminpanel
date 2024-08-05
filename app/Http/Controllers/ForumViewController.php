@@ -13,4 +13,9 @@ class ForumViewController extends Controller
     $forum->load('posts');
     return view('forums.view', compact('forum'));
 }
+public function index()
+    {
+        $forums = Forum::with('category')->withCount('posts')->get();
+        return view('forums.index', compact('forums'));
+    }
 }

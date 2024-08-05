@@ -8,6 +8,7 @@
             <tr>
                 <th>Forum</th>
                 <th>Description</th>
+                <th>Posts Count</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
             <tr>
                 <td>{{ $forum->title }}</td>
                 <td>{{ $forum->description }}</td>
+                <td>{{ $forum->posts_count }}</td>
                 <td>
                     <a href="{{ route('forums.view', $forum->id) }}" class="btn btn-primary">View Posts</a>
                 </td>

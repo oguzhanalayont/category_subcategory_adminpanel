@@ -11,7 +11,6 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Posts Count</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,7 +19,6 @@
             <tr>
                 <td>{{ $forum->title }}</td>
                 <td>{{ $forum->description }}</td>
-                <td>{{ $forum->posts_count }}</td>
                 <td>
                     <a href="{{ route('forums.show', $forum) }}" class="btn btn-sm btn-info">View</a>
                     <a href="{{ route('forums.edit', $forum) }}" class="btn btn-sm btn-warning">Edit</a>
