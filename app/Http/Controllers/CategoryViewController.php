@@ -16,5 +16,4 @@ class CategoryViewController extends Controller
     }]);
     return view('categories.view', compact('category'));
 }
-
 }

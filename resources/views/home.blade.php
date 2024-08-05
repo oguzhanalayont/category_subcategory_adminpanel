@@ -11,7 +11,10 @@
 </style>
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <h1 class="mb-4">Kategoriler</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Kategoriler</h1>
+            <a href="{{ route('categories.show') }}" class="btn btn-primary">View All Categories</a>
+        </div>
         <div class="row">
             @foreach($categories as $category)
                 <div class="col-md-6 mb-4">

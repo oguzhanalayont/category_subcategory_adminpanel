@@ -18,10 +18,10 @@ class CategoryController extends Controller
         return view('categories.create');
     }
 
-    public function show(Category $category)
+    public function show()
 {
-    $category->load('forums');
-    return view('categories.show', compact('category'));
+    $categories = Category::all();
+    return view('categories.show', compact('categories'));
 }
 
     public function store(Request $request)
