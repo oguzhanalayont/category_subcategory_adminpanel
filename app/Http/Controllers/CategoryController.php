@@ -13,6 +13,13 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
+    public function list(Category $category)
+    {
+        $category->load(['forums' => function ($query) {
+            $query->withCount('posts');
+        }]);
+        return view('categories.list', compact('category'));
+    }
     public function create()
     {
         return view('categories.create');
