@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+<style>
+    body {
+        background-image: url('{{ asset('images/background.jpg') }}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
 @section('content')
 <div class="container">
     <h1>Edit Forum</h1>
