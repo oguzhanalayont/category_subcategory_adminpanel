@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index()
-    {
-        $posts = Post::with('forum')->latest()->get();
-        return view('posts.index', compact('posts'));
-    }
-
+{
+    $posts = Post::with(['forum', 'comments.user'])
+        ->withCount('comments')
+        ->latest()
+        ->paginate(10);
+    
+    return view('posts.index', compact('posts'));
+}
     public function create()
     {
         $forums = Forum::all();
