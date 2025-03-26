@@ -24,17 +24,25 @@ class PostController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'forum_id' => 'required|exists:forums,id',
-        ]);
+{
+   $validatedData = $request->validate([
+       'title' => 'required|max:255',
+       'content' => 'required', 
+       'forum_id' => 'required|exists:forums,id',
+   ]);
 
-        Post::create($validatedData);
-
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
-    }
+   // Forum kontrolü 
+   $forum = Forum::findOrFail($request->forum_id);
+   
+   // Post oluşturma yetki kontrolü
+   if (auth()->check()) {
+       $validatedData['user_id'] = auth()->id();
+       Post::create($validatedData);
+       return redirect()->route('posts.index')->with('success', 'Post başarıyla oluşturuldu.');
+   }
+   
+   return redirect()->back()->with('error', 'Post oluşturmak için giriş yapmanız gerekli.');
+}
 
     public function show(Post $post)
     {
